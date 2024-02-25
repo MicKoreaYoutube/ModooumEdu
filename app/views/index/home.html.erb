@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>ModooumEdu - 교육의 모든 것</title>
+		<style>
+			@media (max-width: 1070px) {
+				.d-flex {
+					flex-direction: column !important;
+					text-align: center !important;
+				}
+				.fa-10x {
+					font-size: 800% !important;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div
+			class="OneMobilePop d-flex justify-content-between"
+			style="padding: 10%; background-color: #f9fafb;"
+		>
+			<div class="animate__animated p-2" id="item1">
+				<p style="font-size: 240%;">모두의 교육 플랫폼, ModooumEdu</p>
+				<p style="font-size: 160%;" class="text-secondary">
+					이 시대에 가장 중요한 것은 교육입니다. <br />ModooumEdu에서는 여러분의 입맛에
+					맞게 강좌를 <br />
+					신청하고 결제하고 직접 만들어볼 수도 있습니다
+				</p>
+				<button class="btn btn-success btn-lg">
+					지금 시작하기
+				</button>
+			</div>
+			<div class="p-2">
+				<i class="fa-solid fa-school fa-10x" style="font-size: 1200%;"></i>
+			</div>
+		</div>
+		<div
+			class="OneMobilePop text-end text-white d-flex justify-content-between"
+			style="padding: 10%; background-color: black;"
+		>
+			<div class="p-2">
+				<i class="fa-solid fa-chalkboard-user fa-10x" style="font-size: 1200%;"></i>
+			</div>
+			<div class="animate__animated p-2" id="item2">
+				<p style="font-size: 240%;">왜 ModooEdu 인가요?</p>
+				<p style="font-size: 160%;">
+					ModooEdu는 모든 분야의 강좌를 총망라하고 있는<br />다른 기업과 차별화된 교육
+					플랫폼입니다.
+				</p>
+				<button class="btn btn-light btn-lg">
+					회사 소개
+				</button>
+			</div>
+		</div>
+		<div
+			class="OneMobilePop text-center center text-white"
+			style="padding: 5%; background-color: #3498db;"
+		>
+			<div class="animate__animated" id="item3">
+				<p style="font-size: 240%;">검증된 ModooEdu</p>
+				<p style="font-size: 160%;">
+					ModooEdu는 수강생들에게 정말 도움되는 컨텐츠들로 가득차 있습니다!
+				</p>
+			</div>
+			<br />
+			<div class="d-flex justify-content-evenly" id="item4">
+				<div>
+					<span class="fa-4x" id="item4-1">0+</span>
+					<br />
+					<span class="fa-2x">강의 수</span>
+				</div>
+				<div>
+					<span class="fa-4x" id="item4-2">0+</span>
+					<br />
+					<span class="fa-2x">수강생 수</span>
+				</div>
+				<div>
+					<span class="fa-4x" id="item4-3">0+</span>
+					<br />
+					<span class="fa-2x">조회수</span>
+				</div>
+			</div>
+		</div>
+		<div class="OneMobilePop" style="font-size: 150%;">
+			<div class="font-big" style="padding: 3%;">
+				<h2>최근 인기있는 강좌+</h2>
+				<p class="text-center text-secondary" style="padding: 1%;">
+					업로드된 강좌가 없습니다
+				</p>
+			</div>
+			<hr />
+			<div class="font-big" style="padding: 3%;">
+				<h2>최근 올라온 강좌+</h2>
+				<p class="text-center text-secondary" style="padding: 1%;">
+					업로드된 강좌가 없습니다
+				</p>
+			</div>
+			<hr />
+			<div class="font-big" style="padding: 3%;">
+				<h2>추천 강좌, 나랑 어울리는 강좌+</h2>
+				<p class="text-center text-secondary" style="padding: 1%;">
+					업로드된 강좌가 없습니다
+				</p>
+			</div>
+			<hr />
+			<div class="font-big" style="padding: 3%;">
+				<h2>무료 강좌+</h2>
+				<p class="text-center text-secondary" style="padding: 1%;">
+					업로드된 강좌가 없습니다
+				</p>
+			</div>
+		</div>
+		<div
+			class="OneMobilePop center text-center text-white"
+			style="padding: 7%; background-color: #ef4444;"
+			id="item5"
+		>
+			<div class="animate__animated" id="item5-1">
+				<i class="fa-solid fa-circle-plus fa-10x"></i>
+			</div>
+			<div class="animate__animated" id="item5-2">
+				<h2>강좌가 마음에 안 드시나요?</h2>
+				<p style="font-size: 160%;">
+					ModooEdu에서는 자신의 강좌를 직접 만들어 볼 수 있습니다
+				</p>
+				<button class="btn btn-primary btn-lg">
+					강좌 제작하기
+				</button>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function () {
+				let item1 = document.querySelector('#item1');
+				let observer1 = new IntersectionObserver((e) => {
+					e.forEach((box) => {
+						if (box.isIntersecting) {
+							if ((box.intersectionRatio = 1)) {
+								$(box.target).addClass('animate__fadeInLeft');
+							}
+						}
+					});
+				});
+				observer1.observe(item1);
+				let item2 = document.querySelector('#item2');
+				let observer2 = new IntersectionObserver((e) => {
+					e.forEach((box) => {
+						if (box.isIntersecting) {
+							if ((box.intersectionRatio = 1)) {
+								$(box.target).addClass('animate__fadeInRight');
+							}
+						}
+					});
+				});
+				observer2.observe(item2);
+				let item3 = document.querySelector('#item3');
+				let observer3 = new IntersectionObserver((e) => {
+					e.forEach((box) => {
+						if (box.isIntersecting) {
+							if ((box.intersectionRatio = 1)) {
+								$(box.target).addClass('animate__zoomIn');
+							}
+						}
+					});
+				});
+				observer3.observe(item3);
+				var i = 0;
+				var j = 0;
+				var k = 0;
+				let item4 = document.querySelector('#item4');
+				let observer4 = new IntersectionObserver((e) => {
+					e.forEach((box) => {
+						if (box.isIntersecting) {
+							if ((box.intersectionRatio = 1)) {
+								if (i <= 30) {
+									var timer1 = setInterval(function () {
+										document.getElementById('item4-1').innerHTML = i + '+';
+										i += 1;
+										if (i > 30) {
+											clearInterval(timer1);
+										}
+									}, 50);
+								}
+								if (j <= 35) {
+									var timer2 = setInterval(function () {
+										document.getElementById('item4-2').innerHTML = j + '+';
+										j += 1;
+										if (j > 35) {
+											clearInterval(timer2);
+										}
+									}, 50);
+								}
+								if (k <= 4150) {
+									var timer3 = setInterval(function () {
+										document.getElementById('item4-3').innerHTML = k + '+';
+										k += 12;
+										if (k > 4154) {
+											k -= 10;
+											document.getElementById('item4-3').innerHTML = k + '+';
+											clearInterval(timer3);
+										}
+									}, 1);
+								}
+							}
+						}
+					});
+				});
+				observer4.observe(item4);
+				let item5 = document.querySelector('#item5');
+				let observer5 = new IntersectionObserver((e) => {
+					e.forEach((box) => {
+						if (box.isIntersecting) {
+							if ((box.intersectionRatio = 1)) {
+								$('#item5-1').addClass('animate__zoomIn');
+								$('#item5-2').addClass('animate__zoomIn');
+							}
+						}
+					});
+				});
+				observer5.observe(item5);
+			});
+		</script>
+	</body>
+</html>

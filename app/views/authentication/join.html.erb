@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>ModooumEdu - 회원가입</title>
+	</head>
+	<body>
+		<div class="container OneMobilePop m-2 mx-auto rounded-4 border border-2">
+			<span class="fa-3x d-block text-center">회원가입</span>
+			<span class="d-block text-center text-secondary"
+				>하나의 Modooum계정으로 모든 Modooum의 서비스를 이용해보세요</span
+			>
+			<div class="alert alert-danger d-none" role="alert" id="alert">
+				경고창
+			</div>
+			<div class="progress" role="progressbar" aria-label="Basic example">
+				<div class="progress-bar" style="width: 0%;"></div>
+			</div>
+			<div class="mt-3" id="first">
+				<div class="mb-3">
+					<label for="exampleFormControlInput1" class="form-label">이메일*</label>
+					<input
+						type="email"
+						class="form-control auth"
+						placeholder="이메일 입력..."
+						id="email"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="exampleFormControlInput1" class="form-label">비밀번호*</label>
+					<input
+						type="password"
+						class="form-control auth"
+						placeholder="비밀번호 입력..."
+						id="pwd"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="exampleFormControlInput1" class="form-label">비밀번호 확인*</label>
+					<input
+						type="password"
+						class="form-control auth"
+						placeholder="비밀번호 입력..."
+						id="pwdCheck"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="exampleFormControlInput1" class="form-label">닉네임*</label>
+					<input
+						type="text"
+						class="form-control auth"
+						placeholder="닉네임 입력..."
+						id="name"
+					/>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="flexCheckDefault" />
+					<label class="form-check-label" for="flexCheckDefault">
+						나는 이용약관과 개인정보보호처리방침의 내용을 확실하게 숙지하고 동의합니다.
+					</label>
+				</div>
+				<button class="btn btn-success d-block mx-auto mt-1" type="submit" id="submit">
+					회원가입
+				</button>
+			</div>
+			<div class="d-none text-center container" id="second">
+				<h1>거의 다 왔습니다!</h1>
+				<div class="d-block">
+					<span class="fa-2x">1. 이메일을 확인하고 인증해주세요</span>
+					<span>이메일이 오지 않았나요?</span>
+					<button
+						onclick="firebase.auth().currentUser.sendEmailVerification()"
+						class="btn btn-primary"
+					>
+						다시 보내기
+					</button>
+				</div>
+			</div>
+			<hr />
+			<div class="mb-3 text-center">
+				<div class="link">
+					<span class="fs-5">이미 계정이 있나요?</span>
+					<a href="/login" role="button" class="btn btn-secondary">로그인</a>
+				</div>
+				<span>&nbsp;&nbsp;&nbsp;혹은&nbsp;&nbsp;&nbsp;</span>
+				<div class="link">
+					<span class="fs-5">비밀번호를 잃어버렸나요?</span>
+					<a href="" role="button" class="btn btn-secondary">비밀번호 찾기</a>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function () {
+				allogin();
+			});
+			function authDo() {
+				if ($('.auth').val() != '' && $('#flexCheckDefault').is(':checked') == true) {
+					if ($('#pwd').val() == $('#pwdCheck').val()) {
+						firebase
+							.auth()
+							.createUserWithEmailAndPassword($('#email').val(), $('#pwd').val())
+							.then((userCredential) => {
+								let user = userCredential.user;
+								user.sendEmailVerification();
+								const db = firebase.firestore();
+								db.collection('users')
+									.doc(user.uid)
+									.set({
+										name: $('#name').val(),
+										role: 'default',
+										point: 1000,
+										profilePicture:
+											'https://lh3.googleusercontent.com/u/0/drive-viewer/AAOQEOTO7nmeCjrhQUZOFwN8Y3MNwvi7vAKkNrGfolwAHFpovHJNB8ubZRguoRK8zT_oMb5UNPGbHvlFq23rQwIzMeS5aHgdPw=w1920-h892',
+									})
+									.then(() => {
+										console.log('Document successfully written!');
+									})
+									.catch((error) => {
+										var errorCode = error.code;
+										var errorMessage = error.message;
+										$('#alert').removeClass('d-none');
+										document.querySelector('#alert').innerHTML = error.message;
+									});
+								$('#first').addClass('d-none');
+								$('#second').removeClass('d-none');
+								document.querySelector('.progress-bar').style.width = '50%';
+							})
+							.catch((error) => {
+								var errorCode = error.code;
+								var errorMessage = error.message;
+								$('#alert').removeClass('d-none');
+								document.querySelector('#alert').innerHTML = error.message;
+							});
+					} else {
+						$('#alert').removeClass('d-none');
+						document.querySelector('#alert').innerHTML =
+							'비밀번호란과 비밀번호 확인란이 일치하지 않습니다. 다시 확인해주세요.';
+					}
+				} else {
+					$('#alert').removeClass('d-none');
+					document.querySelector('#alert').innerHTML = '입력란을 전부 다 채워주세요.';
+				}
+			}
+			document.querySelector('#submit').addEventListener('click', authDo);
+		</script>
+	</body>
+</html>
